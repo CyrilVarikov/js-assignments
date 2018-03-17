@@ -268,7 +268,6 @@ function isPrime(n) {
  function toNumber(value, def) {
      // throw new Error('Not implemented');
      if (!isNaN(value)) {
-       // console.log(value);
        return +value;
      } else {
        return def;
