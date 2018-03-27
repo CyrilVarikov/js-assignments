@@ -691,7 +691,15 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+  //  throw new Error('Not implemented');
+  let countryMap = new Map();
+    array.map(item => {
+        countryMap.set(keySelector(item), countryMap.get(keySelector(item)) ? [
+            ...countryMap.get(keySelector(item)),
+                valueSelector(item)] : [valueSelector(item)])
+    });
+    return countryMap;
+
    
 }
 
@@ -709,9 +717,11 @@ function group(array, keySelector, valueSelector) {
  */
 function selectMany(arr, childrenSelector) {
     // throw new Error('Not implemented');
-    return arr.map((elem) => {
-      return elem.map(childrenSelector);
+    arr[0]=childrenSelector(arr[0]);
+    return arr.reduce((prev,cur)=>{
+        return [...prev,...childrenSelector(cur)];
     });
+    
     
 }
 
@@ -758,19 +768,13 @@ function getElementByIndexes(arr, indexes) {
  *
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
-    if(arr.length === 2){
-      return arr.reverse();
-    }
-    let temp = arr.slice(0);
-    return arr.map((elem, pos) => {
-      if (pos < Math.ceil(arr.length / 2) - 1) {
-        
-      }
-    })
-    
-    arr.splice(0, Math.ceil(arr.length / 2), temp.slice(-Math.ceil(arr.length / 2)));
-    arr.splice(Math.ceil(arr.length / 2) + 1, Math.ceil(arr.length / 2), temp.slice(Math.ceil(arr.length / 2)) );
+  let head = [...arr];
+  let center=[];
+  arr.length% 2  != 0 ? center.push(Math.round(arr.length/2)) : false;
+  head.length = Math.floor(head.length/2);
+  let tail =[...arr];
+  tail = tail.splice(Math.round(tail.length/2));
+  return([...tail,...center,...head]);
     
 
 }
