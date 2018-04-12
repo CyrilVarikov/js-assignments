@@ -635,6 +635,7 @@ function getIntervalArray(start, end) {
   //  throw new Error('Not implemented');
   return Array.from(Array(end - start + 1), () => start++);
 }
+let a = getIntervalArray(1,5);
 
 /**
  * Возвращаемый массив содержит только уникальные значения переданного массива.
@@ -770,7 +771,7 @@ function getElementByIndexes(arr, indexes) {
 function swapHeadAndTail(arr) {
   let head = [...arr];
   let center=[];
-  arr.length% 2  != 0 ? center.push(Math.round(arr.length/2)) : false;
+  arr.length % 2  != 0 ? center.push(Math.round(arr.length/2)) : false;
   head.length = Math.floor(head.length/2);
   let tail =[...arr];
   tail = tail.splice(Math.round(tail.length/2));

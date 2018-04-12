@@ -44,9 +44,30 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
+    // let countBottle = 99;
+    // while (countBottle > 1) {
+    //     yield `${countBottle} bottles of beer on the wall, ${countBottle--} bottles of beer.`;
+    //     yield `Take one down and pass it around, ${countBottle} ${countBottle > 1 ? 'bottles' : 'bottle'} of beer on the wall.`;
+    // }
+    // yield '1 bottle of beer on the wall, 1 bottle of beer.';
+    // yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+    // yield 'No more bottles of beer on the wall, no more bottles of beer.';
+    // yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
+    let countBottles = 99;
+    while (countBottles > 1) {
+        yield `${countBottles} bottles of beer on the wall, ${countBottles--} bottles of beer.`;
+        yield `Take one down and pass it around, ${countBottles} ${(countBottles > 1? 'bottles':'bottle')} of beer on the wall.`;
+    }
+    yield '1 bottle of beer on the wall, 1 bottle of beer.';
+    yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+    yield 'No more bottles of beer on the wall, no more bottles of beer.';
+    yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
+
+    
 }
 
+// 
 
 /**
  * Возвращает последовательность Фибоначчи:
