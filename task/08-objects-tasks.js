@@ -148,6 +148,10 @@ const cssSelectorBuilder = {
     combine: function(selector1, combinator, selector2) {
         throw new Error('Not implemented');
     },
+
+    stringify: function(){
+        return this.elemets.join();
+    }
 };
 
 

@@ -27,7 +27,10 @@
  *
  */
 function getComposition(f,g) {
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
+    return function(x){
+        return f(g(x));
+    }
 }
 
 
@@ -48,7 +51,10 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
+    return function(x){
+        return Math.pow(x,exponent);
+    }
 }
 
 
@@ -66,7 +72,21 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom() {
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
+    let arr = [];
+    switch(arguments.length){
+        case 3: arr.push(arguments[0], arguments[1], arguments[2]); break;
+        case 2: arr.push(arguments[0], arguments[1]); break;
+        case 1: arr.push(arguments[0]); break;
+        case 0: arr.push(null); break;
+    }
+    return function(x){
+        switch(arr.length){
+            case 3: return arr[0] * Math.pow(x, 2) + arr[1] * x + arr[2];
+            case 2: return arr[0]*x + arr[1];
+            case 1 || 0: return arr[0];
+        }
+    }
 }
 
 
@@ -85,7 +105,15 @@ function getPolynom() {
  *   memoizer() => тоже рандомное число  (при всех последующих вызовах возвращается тоже закешированный результат)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
+    let obj = {};
+    return function(){
+        let temp = JSON.stringify(arguments);
+        if(!obj.hasOwnProperty(temp)){
+            obj[temp] = func.call(this);
+        }
+        return obj[temp];
+    }
 }
 
 
@@ -105,6 +133,7 @@ function memoize(func) {
  */
 function retry(func, attempts) {
     throw new Error('Not implemented');
+    console.log(func());
 }
 
 
