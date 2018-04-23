@@ -132,10 +132,26 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-    throw new Error('Not implemented');
-    console.log(func());
-}
+    return function () {
+        let res = 0;
+        try {
+            res = func();
+        }
+        catch (ex) {
+            for (var index = 0; index < attempts; index++) {
+                try {
+                    res = func();
+                }
+                catch (er) {
 
+                }
+            }
+
+        }
+        return res;
+    }
+
+}
 
 /**
  * Возвращает логирующую обертку для указанного метода,
@@ -160,7 +176,28 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-    throw new Error('Not implemented');
+    return (...args)=>{
+        let str = '';
+        for (let index = 0; index < args.length; index++) {
+            if (args[index] instanceof Array) {
+                str += '[';
+                for (let i = 0; i < args[index].length; i++)
+                    if ((typeof (args[index][i])).toLowerCase() == "string")
+                        str += "\"" + args[index][i] + "\",";
+                    else
+                        str += args[index][i] + ",";
+                str = str.slice(0, str.length - 1);
+                str += '],';
+            }
+            else
+                str += args[index] + ',';
+        }
+        str = str.slice(0, str.length - 1);
+        logFunc(`${func.name}(${str}) starts`);
+        let res = func.apply(this, args);
+        logFunc(`${func.name}(${str}) ends`);
+        return res;
+    }
 }
 
 
@@ -176,8 +213,11 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args) {
+    // throw new Error('Not implemented');
+    return function(...params){
+        return fn.apply(null, args.concat(params));
+    }
 }
 
 
@@ -198,7 +238,11 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
+    let start = startFrom;
+    return function inc(){
+        return start++;
+    }
 }
 
 
